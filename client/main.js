@@ -43,7 +43,7 @@ function displayQuotes(arr) {
   for (let i = 0; i < arr.length; i++) {
     let quoteItem = document.createElement("h3");
     quoteItem.textContent = arr[i].quoteContent;
-    // quoteItem.addEventListener("click", deleteQuote(arr[i].id));
+    quoteItem.setAttribute("onclick", `deleteQuote(${arr[i].id})`);
     quotesContainer.appendChild(quoteItem);
   }
 }

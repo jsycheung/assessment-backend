@@ -18,17 +18,21 @@ let allQuotes = [
   {
     category: "encouragement",
     quotes: [
-      "Believe you can and you're halfway there!",
-      "Wake up determined, go to bed satisfied!",
-      "You do not find the happy life. You make it!",
+      name + ", " + "Believe you can and you're halfway there!",
+      name + ", " + "Wake up determined, go to bed satisfied!",
+      name + ", " + "You do not find the happy life. You make it!",
     ],
   },
   {
     category: "warning",
     quotes: [
-      "One thorn of experience is worth a whole wilderness of warning",
-      "If you can't be a good example, then be a terrible warning.",
-      "Open your mind before you open your mouth.",
+      name +
+        ", " +
+        "One thorn of experience is worth a whole wilderness of warning",
+      name +
+        ", " +
+        "If you can't be a good example, then be a terrible warning.",
+      name + ", " + "Open your mind before you open your mouth.",
     ],
   },
 ];
@@ -79,9 +83,9 @@ module.exports = {
             name + userQuoteObj.quoteContent.slice("Tim".length);
         }
         userQuotes.push(userQuoteObj);
+        nextAvailableID += 1;
         console.log(userQuotes);
         res.status(200).send(userQuotes);
-        nextAvailableID += 1;
         return;
       }
     }
@@ -100,8 +104,13 @@ module.exports = {
     res.status(200).send(userQuotes);
   },
   deleteQuote: (req, res) => {
-    const id = parseInt(req.params.id, 10);
-    userQuotes.splice(id, 1);
+    const id = Number(req.params.id);
+    console.log(id);
+    let userQuotesIndex = userQuotes.findIndex((userQuote) => {
+      return userQuote.id === id;
+    });
+    userQuotes.splice(userQuotesIndex, 1);
+    console.log(userQuotes);
     res.status(200).send(userQuotes);
   },
 };
